@@ -1,9 +1,11 @@
 const express = require('express');
 const mongoose=require('mongoose') 
-const { PORT,mongoURL } = require('./config');
+require('dotenv').config();
+const { dbConfig,portConfig } = require('./config');
 const cors = require('cors');
 const app = express();
 app.use(express.json());
+
 app.use(cors())
 app.use('/employee',require('./routes/employeeRoute'))
 app.use('/role',require('./routes/roleRoute'))
@@ -14,10 +16,10 @@ app.get('/',(req,res)=>{
 app.post('/login',(req,res)=>{
     res.status(200).send('Welcome to login app')
 })
-mongoose.connect(mongoURL).then(()=>{
+mongoose.connect(dbConfig.uri).then(()=>{
     console.log("App Connected to Database");
 }).catch(e=>{
     console.log("Database connection Error:",e);
 })
 
-app.listen(PORT, () => console.log(`Server running on PORT:${PORT}`));
+app.listen(portConfig.port, () => console.log(`Server running on PORT:${portConfig.port}`));
