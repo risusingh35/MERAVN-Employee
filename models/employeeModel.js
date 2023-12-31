@@ -19,6 +19,10 @@ const employeeSchema = new mongoose.Schema({
   },
   department: String,
   position: String,
+  roleId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Role' 
+  },
   ...commonFields
 });
 const Employee = mongoose.model('Users', employeeSchema)

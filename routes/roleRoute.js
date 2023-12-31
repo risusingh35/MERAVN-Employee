@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
+const authenticateJWT=require('../middleware/authenticateToken')
 const roleController = require('../controllers/roleController');
+const router = express.Router();
 
-router.get('/', roleController.getAllRole);
-router.post('/', roleController.createRole);
-router.get('/:id', roleController.getRoleById);
-router.put('/:id', roleController.updateRole);
+router.get('/',authenticateJWT, roleController.getAllRole);
+router.post('/', authenticateJWT,roleController.createRole);
+router.get('/:id',authenticateJWT, roleController.getRoleById);
+router.put('/:id',authenticateJWT,roleController.updateRole);
 module.exports = router;

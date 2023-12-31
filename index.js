@@ -9,13 +9,11 @@ app.use(express.json());
 app.use(cors())
 app.use('/employee',require('./routes/employeeRoute'))
 app.use('/role',require('./routes/roleRoute'))
-// app.use('/login', require('./routes/loginRoutes'));
+app.use('/login',require('./routes/loginRoute'))
 app.get('/',(req,res)=>{
     res.status(200).send('Welcome to app')
 })
-app.post('/login',(req,res)=>{
-    res.status(200).send('Welcome to login app')
-})
+
 mongoose.connect(dbConfig.uri).then(()=>{
     console.log("App Connected to Database");
 }).catch(e=>{
